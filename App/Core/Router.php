@@ -18,24 +18,26 @@ class Router
         if (isset($url[0]) && $url[0] != '') {
             self::$controller = ucwords($url[0]);
         } else {
-            self::$controller = Config::get('DEFAULT.controller');
+            self::$controller = Config::get('DEFAULT.page');
         }
         array_shift($url);
 
         //action
         if (isset($url[0]) && $url[0] != '') {
-            self::$action = $url[0].'Action';
+            self::$action =  $url[0].'Action';
         } else {
             self::$action = Config::get('ACTION.index');
         }
-        array_shift($url);
 
-        $params = $url;
         
         //check if class and methods exist
         if (file_exists(Config::get('PATH.controller').self::$controller.'.php')) {
-            echo "class exists";
-            if (function_exists(self::$action)) {
+            echo "class exists<br>";
+            echo "class ".self::$controller."<br>";
+            echo "Method ".self::$action."<br>";
+            $controller = 'App\Controller\Page\\'.self::$controller;
+            $controllerClass = new $controller();
+            if (method_exists($controllerClass, self::$action)) {
                 echo "exists";
             } else {
                 echo "doesnt exists";

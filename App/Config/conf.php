@@ -1,4 +1,6 @@
 <?php
+$root = $_SERVER['DOCUMENT_ROOT'];
+
 return [
     "DEFAULT" => [
         "page" => "Home"
@@ -6,9 +8,11 @@ return [
     "ACTION" => [
         "index" => "indexAction"
     ],
+    //i guess the problem is on you path, 
     "PATH" => [
-        "view" => "/opt/lampp/htdocs/test/php/mosco/App/View/",
-        "layout" => "/opt/lampp/htdocs/test/php/mosco/App/Layout/",
-        "controller" => "/opt/lampp/htdocs/test/php/mosco/App/Controller/Page/"
+        "view" => $root."/tests/mosco/App/View/",
+        "layout" => $root."/tests/mosco/App/Layout/",
+        "controller" => $root."/tests/mosco/App/Controller/Page/"
     ]
 ];
+
